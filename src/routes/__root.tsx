@@ -14,8 +14,8 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { BackToTop } from "@/components/site/BackToTop";
-import { CustomCursor } from "@/components/site/CustomCursor";
 import { ScrollProgress } from "@/components/site/ScrollProgress";
+import { CustomCursor } from "@/components/site/CustomCursor";
 import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
@@ -180,8 +180,8 @@ function RootComponent() {
       </main>
       <Footer />
       <BackToTop />
-      <CustomCursor />
       <ScrollProgress />
+      <CustomCursor />
       <Toaster />
     </QueryClientProvider>
   );

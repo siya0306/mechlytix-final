@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,10 @@ import { cn } from "@/lib/utils";
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+
+  const toggleMenu = () => setOpen((value) => !value);
+  const closeMenu = () => setOpen(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -17,11 +21,38 @@ export function Header() {
   }, []);
 
   useEffect(() => {
+    closeMenu();
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1280) {
+        setOpen(false);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <header
@@ -60,13 +91,13 @@ export function Header() {
             asChild
             variant="hero"
             size="lg"
-            className="hidden shrink-0 sm:inline-flex xl:px-4 2xl:px-5"
+            className="hidden shrink-0 xl:inline-flex xl:px-4 2xl:px-5"
           >
             <Link to="/contact">Talk to an Expert</Link>
           </Button>
           <button
             type="button"
-            onClick={() => setOpen((v) => !v)}
+            onClick={toggleMenu}
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -79,28 +110,42 @@ export function Header() {
 
       {open && (
         <div
+          aria-hidden="true"
+          onClick={closeMenu}
+          className="fixed inset-x-0 top-[4.5rem] bottom-0 z-[60] bg-[#03213f]/25 backdrop-blur-[1px] xl:hidden"
+        />
+      )}
+
+      {open && (
+        <div
           id="mobile-nav"
-          className="fixed inset-x-0 top-18 bottom-0 z-40 overflow-y-auto border-t border-border bg-background xl:hidden"
+          className="absolute inset-x-0 top-full z-[70] max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-border bg-background shadow-lg xl:hidden"
+          aria-hidden={false}
         >
-          <nav aria-label="Mobile" className="container-page flex flex-col gap-1 py-5">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to as never}
-                onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-3 text-base font-extrabold tracking-[0.04em] text-foreground/85 uppercase transition-colors hover:bg-sky-soft hover:text-primary"
-                activeProps={{ className: "text-primary bg-sky-soft" }}
-                activeOptions={{ exact: item.to === "/" }}
-              >
-                {item.label}
-              </Link>
-            ))}
-            <Button asChild variant="hero" size="xl" className="mt-4 w-full">
-              <Link to="/contact" onClick={() => setOpen(false)}>
+          <div className="container-page flex min-h-full flex-col px-4 pb-8 pt-5">
+            <nav aria-label="Mobile" className="flex flex-col">
+              {NAV_ITEMS.map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to as never}
+                  onClick={closeMenu}
+                  className={cn(
+                    "flex min-h-12 w-full items-center border-b border-border px-1 text-left text-sm font-extrabold tracking-[0.04em] text-foreground uppercase transition-colors hover:bg-sky-soft hover:text-primary",
+                  )}
+                  activeProps={{ className: "text-primary" }}
+                  activeOptions={{ exact: item.to === "/" }}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+
+            <Button asChild variant="hero" size="xl" className="mt-7 w-full rounded-lg text-base font-extrabold">
+              <Link to="/contact" onClick={closeMenu}>
                 Talk to an Expert
               </Link>
             </Button>
-          </nav>
+          </div>
         </div>
       )}
     </header>
