@@ -67,7 +67,7 @@ function ContactPage() {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitting, setSubmitting] = useState(false);
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
@@ -86,14 +86,45 @@ function ContactPage() {
 
     setErrors({});
     setSubmitting(true);
-    window.setTimeout(() => {
-      setSubmitting(false);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(parsed.data),
+      });
+
+      if (!response.ok) {
+        const result = (await response.json().catch(() => null)) as { error?: string } | null;
+        if (response.status === 503) {
+          const subject = encodeURIComponent(`Website enquiry from ${parsed.data.name}`);
+          const body = encodeURIComponent(
+            [
+              `Name: ${parsed.data.name}`,
+              `Company: ${parsed.data.company}`,
+              `Email: ${parsed.data.email}`,
+              `Phone: ${parsed.data.phone}`,
+              `Area of interest: ${parsed.data.service}`,
+              "",
+              parsed.data.message,
+            ].join("\n"),
+          );
+          window.location.href = `mailto:info@mechlytix.in?subject=${subject}&body=${body}`;
+          return;
+        }
+        throw new Error(result?.error ?? "We could not send your enquiry.");
+      }
+
       form.reset();
       setService("");
-      toast.success("Thank you — your enquiry has been recorded.", {
-        description: `We'll get back to you shortly. For urgent requests call ${COMPANY.phone}.`,
+      toast.success("Your enquiry has been sent to Mechlytix.", {
+        description: "We'll get back to you shortly.",
       });
-    }, 700);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "We could not send your enquiry.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
