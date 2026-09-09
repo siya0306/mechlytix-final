@@ -5,10 +5,7 @@ export const COMPANY = {
   positioning:
     "Your Trusted Partner for Operational Excellence, Business Transformation & Sustainable Growth.",
   website: "www.mechlytix.in",
-  email: "info@mechlytix.in",
-  emailHref: "mailto:info@mechlytix.in",
   emails: [
-    { address: "info@mechlytix.in", href: "mailto:info@mechlytix.in" },
     { address: "kunalmistry@mechlytix.in", href: "mailto:kunalmistry@mechlytix.in" },
     { address: "ankitrathwa@mechlytix.in", href: "mailto:ankitrathwa@mechlytix.in" },
   ],
