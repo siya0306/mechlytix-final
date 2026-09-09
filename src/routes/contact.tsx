@@ -58,6 +58,7 @@ const DETAILS = [
     Ico: Phone,
     href: phone.href,
   })),
+  { label: "Email", value: COMPANY.email, Ico: Mail, href: COMPANY.emailHref },
   { label: "Website", value: COMPANY.website, Ico: Globe, href: `https://${COMPANY.website}` },
   { label: "Location", value: COMPANY.location, Ico: MapPin, href: null },
 ];

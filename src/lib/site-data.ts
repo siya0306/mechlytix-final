@@ -7,6 +7,8 @@ export const COMPANY = {
   website: "www.mechlytix.in",
   contactName: "Kunal R Mistry",
   contactNames: ["Kunal R Mistry", "Ankit D Rathwa"],
+  email: "info@mechlytix.in",
+  emailHref: "mailto:info@mechlytix.in",
   phone: "+91 81550 63984",
   phoneHref: "tel:+918155063984",
   phones: [

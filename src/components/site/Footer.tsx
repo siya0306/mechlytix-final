@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Globe, MapPin, Phone, User } from "lucide-react";
+import { Globe, Mail, MapPin, Phone, User } from "lucide-react";
 import { COMPANY, CORE_AREAS, FOOTER_NAV } from "@/lib/site-data";
 
 export function Footer() {
@@ -71,6 +71,12 @@ export function Footer() {
                   </a>
                 </li>
               ))}
+              <li className="flex items-center gap-3">
+                <Mail className="size-4 shrink-0" aria-hidden="true" />
+                <a href={COMPANY.emailHref} className="hover:text-navy-foreground">
+                  {COMPANY.email}
+                </a>
+              </li>
               <li className="flex items-center gap-3">
                 <Globe className="size-4 shrink-0" aria-hidden="true" />
                 <a

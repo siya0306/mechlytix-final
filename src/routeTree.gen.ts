@@ -19,6 +19,7 @@ import { Route as RecruitmentRouteImport } from './routes/recruitment'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as TechnicalExpertiseRouteImport } from './routes/technical-expertise'
 import { Route as TrainingRouteImport } from './routes/training'
+import { Route as ApiZohoCallbackRouteImport } from './routes/api/zoho/callback'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -70,6 +71,11 @@ const TrainingRoute = TrainingRouteImport.update({
   path: '/training',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiZohoCallbackRoute = ApiZohoCallbackRouteImport.update({
+  id: '/api/zoho/callback',
+  path: '/api/zoho/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/solutions': typeof SolutionsRoute
   '/technical-expertise': typeof TechnicalExpertiseRoute
   '/training': typeof TrainingRoute
+  '/api/zoho/callback': typeof ApiZohoCallbackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -94,6 +101,7 @@ export interface FileRoutesByTo {
   '/solutions': typeof SolutionsRoute
   '/technical-expertise': typeof TechnicalExpertiseRoute
   '/training': typeof TrainingRoute
+  '/api/zoho/callback': typeof ApiZohoCallbackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/solutions': typeof SolutionsRoute
   '/technical-expertise': typeof TechnicalExpertiseRoute
   '/training': typeof TrainingRoute
+  '/api/zoho/callback': typeof ApiZohoCallbackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/solutions'
     | '/technical-expertise'
     | '/training'
+    | '/api/zoho/callback'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/solutions'
     | '/technical-expertise'
     | '/training'
+    | '/api/zoho/callback'
   id:
     | '__root__'
     | '/'
@@ -145,6 +156,7 @@ export interface FileRouteTypes {
     | '/solutions'
     | '/technical-expertise'
     | '/training'
+    | '/api/zoho/callback'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -158,6 +170,7 @@ export interface RootRouteChildren {
   SolutionsRoute: typeof SolutionsRoute
   TechnicalExpertiseRoute: typeof TechnicalExpertiseRoute
   TrainingRoute: typeof TrainingRoute
+  ApiZohoCallbackRoute: typeof ApiZohoCallbackRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -232,6 +245,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrainingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/zoho/callback': {
+      id: '/api/zoho/callback'
+      path: '/api/zoho/callback'
+      fullPath: '/api/zoho/callback'
+      preLoaderRoute: typeof ApiZohoCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -246,6 +266,7 @@ const rootRouteChildren: RootRouteChildren = {
   SolutionsRoute: SolutionsRoute,
   TechnicalExpertiseRoute: TechnicalExpertiseRoute,
   TrainingRoute: TrainingRoute,
+  ApiZohoCallbackRoute: ApiZohoCallbackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

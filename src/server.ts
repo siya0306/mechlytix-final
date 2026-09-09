@@ -29,6 +29,8 @@ async function handleContactRequest(request: Request, env: unknown): Promise<Res
   if (!apiKey) {
     return jsonResponse({ error: "Email delivery is not configured." }, 503);
   }
+  const fromAddress =
+    getEnvValue(env, "RESEND_FROM_EMAIL") ?? "Mechlytix Website <onboarding@resend.dev>";
 
   let payload: ContactPayload;
   try {
@@ -49,7 +51,7 @@ async function handleContactRequest(request: Request, env: unknown): Promise<Res
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: "Mechlytix Website <onboarding@resend.dev>",
+      from: fromAddress,
       to: [CONTACT_RECIPIENT],
       reply_to: payload.email,
       subject: `New website enquiry from ${payload.name}`,
