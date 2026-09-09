@@ -97,22 +97,6 @@ function ContactPage() {
 
       if (!response.ok) {
         const result = (await response.json().catch(() => null)) as { error?: string } | null;
-        if (response.status === 503) {
-          const subject = encodeURIComponent(`Website enquiry from ${parsed.data.name}`);
-          const body = encodeURIComponent(
-            [
-              `Name: ${parsed.data.name}`,
-              `Company: ${parsed.data.company}`,
-              `Email: ${parsed.data.email}`,
-              `Phone: ${parsed.data.phone}`,
-              `Area of interest: ${parsed.data.service}`,
-              "",
-              parsed.data.message,
-            ].join("\n"),
-          );
-          window.location.href = `mailto:info@mechlytix.in?subject=${subject}&body=${body}`;
-          return;
-        }
         throw new Error(result?.error ?? "We could not send your enquiry.");
       }
 
