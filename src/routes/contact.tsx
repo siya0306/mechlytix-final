@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Globe, Mail, MapPin, Phone, Send, User } from "lucide-react";
+import { Globe, Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -51,14 +51,18 @@ const contactSchema = z.object({
 type FieldErrors = Partial<Record<keyof z.infer<typeof contactSchema>, string>>;
 
 const DETAILS = [
-  { label: "Contact Persons", value: COMPANY.contactNames.join(" & "), Ico: User, href: null },
   ...COMPANY.phones.map((phone) => ({
     label: "Phone",
     value: phone.number,
     Ico: Phone,
     href: phone.href,
   })),
-  { label: "Email", value: COMPANY.email, Ico: Mail, href: COMPANY.emailHref },
+  ...COMPANY.emails.map((email) => ({
+    label: "Email",
+    value: email.address,
+    Ico: Mail,
+    href: email.href,
+  })),
   { label: "Website", value: COMPANY.website, Ico: Globe, href: `https://${COMPANY.website}` },
   { label: "Location", value: COMPANY.location, Ico: MapPin, href: null },
 ];

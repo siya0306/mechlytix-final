@@ -120,7 +120,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           description:
             "Industrial engineering, operational excellence, business transformation, technical consulting, training and workforce solutions.",
           url: "https://www.mechlytix.in",
-          telephone: "+91 81550 63984",
+          telephone: "81550 63984",
           areaServed: "IN",
           address: {
             "@type": "PostalAddress",

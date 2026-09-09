@@ -5,16 +5,16 @@ export const COMPANY = {
   positioning:
     "Your Trusted Partner for Operational Excellence, Business Transformation & Sustainable Growth.",
   website: "www.mechlytix.in",
-  contactName: "Kunal R Mistry",
-  contactNames: ["Kunal R Mistry", "Ankit D Rathwa"],
   email: "info@mechlytix.in",
   emailHref: "mailto:info@mechlytix.in",
-  phone: "+91 81550 63984",
-  phoneHref: "tel:+918155063984",
-  phones: [
-    { number: "+91 81550 63984", href: "tel:+918155063984" },
-    { number: "+91 63515 65387", href: "tel:+916351565387" },
+  emails: [
+    { address: "info@mechlytix.in", href: "mailto:info@mechlytix.in" },
+    { address: "kunalmistry@mechlytix.in", href: "mailto:kunalmistry@mechlytix.in" },
+    { address: "ankitrathwa@mechlytix.in", href: "mailto:ankitrathwa@mechlytix.in" },
   ],
+  phone: "81550 63984",
+  phoneHref: "tel:+918155063984",
+  phones: [{ number: "81550 63984", href: "tel:+918155063984" }],
   location:
     "B 215/A, B Wing, Hubtown, Makarpura Depot, Makarpura Rd, Vadodara, Gujarat 390010",
   statement: "We Don't Just Recommend Improvements — We Help Implement Them.",

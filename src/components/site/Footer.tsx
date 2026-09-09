@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Globe, Mail, MapPin, Phone, User } from "lucide-react";
+import { Globe, Mail, MapPin, Phone } from "lucide-react";
 import { COMPANY, CORE_AREAS, FOOTER_NAV } from "@/lib/site-data";
 
 export function Footer() {
@@ -59,10 +59,6 @@ export function Footer() {
               Contact
             </h2>
             <ul className="mt-5 space-y-3 text-sm text-navy-foreground/85">
-              <li className="flex items-center gap-3">
-                <User className="size-4 shrink-0" aria-hidden="true" />
-                <span>{COMPANY.contactNames.join(" & ")}</span>
-              </li>
               {COMPANY.phones.map((phone) => (
                 <li key={phone.href} className="flex items-center gap-3">
                   <Phone className="size-4 shrink-0" aria-hidden="true" />
@@ -71,12 +67,14 @@ export function Footer() {
                   </a>
                 </li>
               ))}
-              <li className="flex items-center gap-3">
-                <Mail className="size-4 shrink-0" aria-hidden="true" />
-                <a href={COMPANY.emailHref} className="hover:text-navy-foreground">
-                  {COMPANY.email}
-                </a>
-              </li>
+              {COMPANY.emails.map((email) => (
+                <li key={email.href} className="flex items-center gap-3">
+                  <Mail className="size-4 shrink-0" aria-hidden="true" />
+                  <a href={email.href} className="hover:text-navy-foreground">
+                    {email.address}
+                  </a>
+                </li>
+              ))}
               <li className="flex items-center gap-3">
                 <Globe className="size-4 shrink-0" aria-hidden="true" />
                 <a

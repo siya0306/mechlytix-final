@@ -320,7 +320,7 @@ function HomePage() {
 
       <CtaBand
         title="Ready to Improve Your Business Performance?"
-        text={`Let's identify opportunities, eliminate inefficiencies and build sustainable improvement. Speak with ${COMPANY.contactName} at ${COMPANY.phone}.`}
+        text={`Let's identify opportunities, eliminate inefficiencies and build sustainable improvement. Call us at ${COMPANY.phone}.`}
         primaryLabel="Talk to an Expert"
         secondaryLabel="Contact Mechlytix"
         secondaryTo="/contact"
