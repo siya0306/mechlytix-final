@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Compass, Eye } from "lucide-react";
 import aboutImage from "@/assets/about-team.jpg";
-import { CtaBand, FeatureCard, PageHero, SectionHeading, StatStrip } from "@/components/site/Blocks";
+import { CtaBand, FeatureCard, PageHero, SectionHeading } from "@/components/site/Blocks";
 import { Reveal } from "@/components/site/Reveal";
 import { APPROACH, COMPANY, MISSION, VISION, WHO_WE_ARE } from "@/lib/site-data";
 
@@ -96,19 +96,6 @@ function AboutPage() {
                 <FeatureCard icon={item.icon} title={item.title} description={item.description} />
               </Reveal>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-y bg-gradient-soft">
-        <div className="container-page">
-          <SectionHeading
-            eyebrow="Our Experience"
-            title="Experience that spans industries and operations"
-            align="center"
-          />
-          <div className="mt-12">
-            <StatStrip />
           </div>
         </div>
       </section>

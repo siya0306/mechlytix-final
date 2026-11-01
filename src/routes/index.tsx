@@ -6,12 +6,7 @@ import parentCompaniesImage from "@/assets/Our-parent-companies.png";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/site/Icon";
 import { Reveal } from "@/components/site/Reveal";
-import {
-  CtaBand,
-  FeatureCard,
-  SectionHeading,
-  StatStrip,
-} from "@/components/site/Blocks";
+import { CtaBand, FeatureCard, SectionHeading } from "@/components/site/Blocks";
 import {
   CHALLENGES,
   COMPANY,
@@ -145,7 +140,6 @@ function HomePage() {
                 className="h-72 w-full object-cover sm:h-90"
               />
             </div>
-            <StatStrip />
           </Reveal>
         </div>
       </section>
